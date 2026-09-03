@@ -7,6 +7,7 @@ export default function ProjectDetail() {
     const [project, setProject] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         api.get(`/public/projects/${slug}`)
@@ -83,14 +84,51 @@ export default function ProjectDetail() {
             </header>
 
            {project.thumbnail && (
-    <div className="aspect-video bg-zinc-100 dark:bg-zinc-900 mb-20 overflow-hidden relative border border-zinc-200 dark:border-white/10 transition-colors duration-500">
-        <img 
-            src={project.thumbnail?.startsWith('/') ? project.thumbnail : `/${project.thumbnail}`} 
-            alt={project.title} 
-            className="w-full h-full object-contain p-4" 
-        />
-    </div>
-)}
+                <>
+                    {/* The Clickable Preview Container */}
+                    <div 
+                        className="aspect-video bg-zinc-100 dark:bg-zinc-900 mb-20 overflow-hidden relative border border-zinc-200 dark:border-white/10 cursor-pointer group"
+                        onClick={() => setIsModalOpen(true)}
+                    >
+                        {/* object-top anchors the crop to the top of your screenshot */}
+                        <img 
+                            src={project.thumbnail?.startsWith('/') ? project.thumbnail : `/${project.thumbnail}`} 
+                            alt={project.title} 
+                            className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" 
+                        />
+                        
+                        {/* The Hover Overlay */}
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <span className="text-white font-bold tracking-widest uppercase text-xs border border-white/50 px-6 py-3 rounded-full backdrop-blur-sm">
+                                View Full Image
+                            </span>
+                        </div>
+                    </div>
+
+                    {/* The Fullscreen Lightbox Modal */}
+                    {isModalOpen && (
+                        <div 
+                            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 md:p-12 cursor-zoom-out backdrop-blur-sm"
+                            onClick={() => setIsModalOpen(false)}
+                        >
+                            <img 
+                                src={project.thumbnail?.startsWith('/') ? project.thumbnail : `/${project.thumbnail}`} 
+                                alt={project.title} 
+                                className="max-w-full max-h-full object-contain rounded-lg shadow-2xl" 
+                            />
+                            {/* Close Button */}
+                            <button 
+                                className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors"
+                                onClick={() => setIsModalOpen(false)}
+                            >
+                                <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                    )}
+                </>
+            )}
 
             <article className="prose prose-zinc dark:prose-invert max-w-none transition-colors duration-500 prose-headings:font-bold prose-headings:tracking-tight prose-p:font-light prose-p:leading-relaxed prose-p:text-lg">
                 <div className="whitespace-pre-wrap">
