@@ -22,6 +22,7 @@ import ExperienceForm from './pages/admin/ExperienceForm';
 import SkillsList from './pages/admin/SkillsList';
 import SkillForm from './pages/admin/SkillForm';
 import Contact from './pages/Contact';
+import Settings from './pages/admin/Settings';
 
 function App() {
     return (
@@ -58,6 +59,8 @@ function App() {
                         <Route path="/manage-luqman/skills" element={<SkillsList />} />
                         <Route path="/manage-luqman/skills/create" element={<SkillForm />} />
                         <Route path="/manage-luqman/skills/:id/edit" element={<SkillForm />} />
+                        {/* Settings CMS */}
+                        <Route path="/manage-luqman/settings" element={<Settings />} /> 
 
                         <Route path="/manage-luqman" element={<Navigate to="/manage-luqman/dashboard" replace />} />
                     </Route>

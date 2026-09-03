@@ -11,3 +11,7 @@ Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/{any}', function () {
     return view('welcome');
 })->where('any', '.*');
+
+Route::middleware('auth')->group(function () {
+    Route::post('/change-password', [AuthController::class, 'changePassword']);
+});
