@@ -30,7 +30,11 @@ export default function ProjectForm() {
                     setCurrentThumbnail(p.thumbnail);
                     setLoading(false);
                 })
-                .catch(err => navigate('/manage-luqman/projects'));
+                .catch(err => {
+    console.error("API Error:", err);
+    setLoading(false); 
+    // We temporarily removed navigate() so you stay on the page!
+});
         }
     }, [id, navigate, isEditing]);
 
