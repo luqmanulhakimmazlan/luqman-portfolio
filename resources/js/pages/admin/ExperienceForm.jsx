@@ -27,6 +27,7 @@ export default function ExperienceForm() {
                     setFormData({
                         company: exp.company || '',
                         position: exp.position || '',
+                        location: exp.location || '',
                         start_date: exp.start_date || '',
                         end_date: exp.end_date || '',
                         description: exp.description || '',
@@ -76,6 +77,7 @@ export default function ExperienceForm() {
                 <div className="grid md:grid-cols-2 gap-6">
                     <div><label className="block text-sm font-medium dark:text-zinc-300 mb-1">Position / Role</label><input type="text" name="position" value={formData.position} onChange={handleChange} required className="w-full px-4 py-2 rounded-lg bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-white/10 dark:text-white" /></div>
                     <div><label className="block text-sm font-medium dark:text-zinc-300 mb-1">Company</label><input type="text" name="company" value={formData.company} onChange={handleChange} required className="w-full px-4 py-2 rounded-lg bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-white/10 dark:text-white" /></div>
+                    <div className="md:col-span-2"><label className="block text-sm font-medium dark:text-zinc-300 mb-1">Location</label> <input type="text" name="location" value={formData.location} onChange={handleChange} required className="w-full px-4 py-2 rounded-lg bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-white/10 dark:text-white" /></div>
                     <div><label className="block text-sm font-medium dark:text-zinc-300 mb-1">Start Date (e.g. Jan 2025)</label><input type="text" name="start_date" value={formData.start_date} onChange={handleChange} required className="w-full px-4 py-2 rounded-lg bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-white/10 dark:text-white" /></div>
                     <div><label className="block text-sm font-medium dark:text-zinc-300 mb-1">End Date (Leave empty for Present)</label><input type="text" name="end_date" value={formData.end_date} onChange={handleChange} className="w-full px-4 py-2 rounded-lg bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-white/10 dark:text-white" /></div>
                     
