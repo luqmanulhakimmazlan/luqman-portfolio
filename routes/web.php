@@ -2,6 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use Illuminate\Support\Facades\Artisan;
+
+Route::get('/create-symlink', function () {
+    Artisan::call('storage:link');
+    return 'Storage linked successfully!';
+});
 
 // 1. Session-based Authentication Routes
 Route::post('/login', [AuthController::class, 'login']);
