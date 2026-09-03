@@ -12,7 +12,7 @@ class ProjectResource extends JsonResource
             'title' => $this->title,
             'slug' => $this->slug,
             'short_description' => $this->short_description,
-            'thumbnail' => $this->thumbnail ? url('storage/' . $this->thumbnail) : null,
+            'thumbnail' => $this->thumbnail,
             'project_date' => $this->project_date ? $this->project_date->format('M Y') : null,
             'featured' => $this->featured,
             'skills' => SkillResource::collection($this->whenLoaded('skills')),

@@ -55,7 +55,7 @@ class ProjectController extends Controller
             'slug' => 'required|string|unique:projects,slug,' . $project->id,
             'short_description' => 'required|string',
             'description' => 'required|string',
-            'thumbnail' => 'nullable|image|max:2048',
+            'thumbnail' => 'nullable|string',
             'role' => 'nullable|string',
             'project_date' => 'nullable|date',
             'github_url' => 'nullable|url',
@@ -63,11 +63,6 @@ class ProjectController extends Controller
             'status' => 'required|in:draft,published,archived',
             'featured' => 'boolean',
         ]);
-
-        if ($request->hasFile('thumbnail')) {
-            $path = $request->file('thumbnail')->store('projects', 'public');
-            $validated['thumbnail'] = '/storage/' . $path;
-        }
 
         $project->update($validated);
         return response()->json($project);
