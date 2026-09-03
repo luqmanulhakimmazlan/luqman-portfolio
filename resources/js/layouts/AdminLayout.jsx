@@ -16,6 +16,7 @@ export default function AdminLayout() {
         { name: 'Projects', path: '/manage-luqman/projects' },
         { name: 'Experience', path: '/manage-luqman/experiences' },
         { name: 'Skills', path: '/manage-luqman/skills' },
+        { name: 'Settings', path: '/manage-luqman/settings' },
     ];
 
     return (

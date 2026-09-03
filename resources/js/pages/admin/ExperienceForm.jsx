@@ -10,6 +10,7 @@ export default function ExperienceForm() {
     const [formData, setFormData] = useState({
         company: '',
         position: '',
+        location: '',
         start_date: '',
         end_date: '',
         description: '',
