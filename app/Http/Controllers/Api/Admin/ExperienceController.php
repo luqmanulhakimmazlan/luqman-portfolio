@@ -19,6 +19,7 @@ class ExperienceController extends Controller
             'company' => 'required|string|max:255',
             'position' => 'required|string|max:255',
             'location' => 'required|string|max:255',
+            'employment_type' => 'required|string|max:255',
             'start_date' => 'required|string|max:255',
             'end_date' => 'nullable|string|max:255',
             'description' => 'required|string',
