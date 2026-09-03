@@ -27,7 +27,6 @@ export default function ProjectForm() {
                         github_url: p.github_url || '', live_url: p.live_url || '',
                         status: p.status || 'draft', featured: p.featured || false,
                     });
-                    setCurrentThumbnail(p.thumbnail);
                     setLoading(false);
                 })
                 .catch(err => {

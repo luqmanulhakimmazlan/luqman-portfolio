@@ -21,7 +21,7 @@ class ProjectController extends Controller
             'slug' => 'nullable|string|unique:projects,slug',
             'short_description' => 'required|string',
             'description' => 'required|string',
-            'thumbnail' => 'nullable|max:2048', // Allow images up to 2MB
+            'thumbnail' => 'nullable|string',
             'role' => 'nullable|string',
             'project_date' => 'nullable|date',
             'github_url' => 'nullable|url',
