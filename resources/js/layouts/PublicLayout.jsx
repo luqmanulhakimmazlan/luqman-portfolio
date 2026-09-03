@@ -9,7 +9,7 @@ export default function PublicLayout() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const navItems = [
-        { path: '/projects', label: 'Work', num: '01' },
+        { path: '/projects', label: 'Projects', num: '01' },
         { path: '/about', label: 'About', num: '02' },
         { path: '/contact', label: 'Contact', num: '03' }
     ];

@@ -43,7 +43,7 @@ export default function Home() {
                     
                     <div className="flex flex-wrap gap-8 items-center mt-4">
                         <Link to="/projects" className="group relative px-8 py-4 bg-zinc-900 dark:bg-white text-white dark:text-black font-bold uppercase tracking-widest text-xs overflow-hidden rounded-none">
-                            <span className="relative z-10">Explore Work</span>
+                            <span className="relative z-10">Explore Projects</span>
                             <div className="absolute inset-0 h-full w-0 bg-zinc-700 dark:bg-zinc-200 transition-all duration-500 ease-out group-hover:w-full z-0"></div>
                         </Link>
                         
@@ -57,7 +57,7 @@ export default function Home() {
                 <section className="py-32 border-t border-zinc-200 dark:border-white/10">
                     <div className="flex flex-col md:flex-row md:justify-between md:items-end mb-24 gap-6">
                         <div>
-                            <h2 className="text-5xl md:text-7xl font-bold text-zinc-900 dark:text-white tracking-tighter">Featured<br/>Work.</h2>
+                            <h2 className="text-5xl md:text-7xl font-bold text-zinc-900 dark:text-white tracking-tighter">Featured<br/>Projects</h2>
                         </div>
                         <Link to="/projects" className="text-xs font-bold uppercase tracking-widest text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors">
                             View Archive →
