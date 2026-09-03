@@ -82,11 +82,15 @@ export default function ProjectDetail() {
                 </div>
             </header>
 
-            {project.thumbnail && (
-                <div className="aspect-video bg-zinc-100 dark:bg-zinc-900 mb-20 overflow-hidden relative border border-zinc-200 dark:border-white/10 transition-colors duration-500">
-                    <img src={project.thumbnail} alt={project.title} className="w-full h-full object-cover" />
-                </div>
-            )}
+           {project.thumbnail && (
+    <div className="aspect-video bg-zinc-100 dark:bg-zinc-900 mb-20 overflow-hidden relative border border-zinc-200 dark:border-white/10 transition-colors duration-500">
+        <img 
+            src={project.thumbnail?.startsWith('/') ? project.thumbnail : `/${project.thumbnail}`} 
+            alt={project.title} 
+            className="w-full h-full object-cover" 
+        />
+    </div>
+)}
 
             <article className="prose prose-zinc dark:prose-invert max-w-none transition-colors duration-500 prose-headings:font-bold prose-headings:tracking-tight prose-p:font-light prose-p:leading-relaxed prose-p:text-lg">
                 <div className="whitespace-pre-wrap">
