@@ -1,13 +1,17 @@
 FROM php:8.2-cli
 
-# 1. Install system dependencies and PostgreSQL drivers
+# 1. Install system dependencies and required PHP extensions for Laravel
 RUN apt-get update && apt-get install -y \
     git \
     curl \
     libpq-dev \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    libzip-dev \
     zip \
     unzip \
-    && docker-php-ext-install pdo pdo_pgsql
+    && docker-php-ext-install pdo pdo_pgsql mbstring xml zip bcmath pcntl
 
 # 2. Install Node.js (needed to build your React frontend)
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
