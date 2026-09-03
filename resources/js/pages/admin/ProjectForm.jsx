@@ -10,12 +10,8 @@ export default function ProjectForm() {
     const [formData, setFormData] = useState({
         title: '', slug: '', short_description: '', description: '',
         role: '', project_date: '', github_url: '', live_url: '',
-        status: 'draft', featured: false,
+        status: 'draft', featured: false, thumbnail: '',
     });
-    
-    // New state to hold the actual File object
-    const [thumbnailFile, setThumbnailFile] = useState(null);
-    const [currentThumbnail, setCurrentThumbnail] = useState(null);
     
     const [loading, setLoading] = useState(isEditing);
     const [saving, setSaving] = useState(false);
@@ -57,32 +53,15 @@ export default function ProjectForm() {
         e.preventDefault();
         setSaving(true);
         
-        const payload = new FormData();
-        
-        // Append all fields, safely converting the boolean to 1 or 0
-        Object.keys(formData).forEach(key => {
-            if (key === 'featured') {
-                payload.append(key, formData[key] ? 1 : 0);
-            } else if (formData[key] !== null && formData[key] !== '') {
-                payload.append(key, formData[key]);
-            }
-        });
-
-        // Append the file if one was selected
-        if (thumbnailFile) {
-            payload.append('thumbnail', thumbnailFile);
-        }
-
-        // Spoof the PUT method for Laravel to handle multipart/form-data updates
-        if (isEditing) {
-            payload.append('_method', 'PUT');
-        }
+        const payload = { ...formData };
+        payload.featured = payload.featured ? 1 : 0; // Convert boolean for Laravel
 
         try {
-            const endpoint = isEditing ? `/admin/projects/${id}` : '/admin/projects';
-            await api.post(endpoint, payload, {
-                headers: { 'Content-Type': 'multipart/form-data' }
-            });
+            if (isEditing) {
+                await api.put(`/admin/projects/${id}`, payload);
+            } else {
+                await api.post('/admin/projects', payload);
+            }
             navigate('/manage-luqman/projects');
         } catch (err) {
             if (err.response?.status === 422) {
@@ -107,14 +86,30 @@ export default function ProjectForm() {
             <form onSubmit={handleSubmit} className="space-y-6 bg-white dark:bg-white/5 p-8 border border-zinc-200 dark:border-white/10 rounded-xl">
                 <div className="grid md:grid-cols-2 gap-6">
                     
-                    {/* Thumbnail Upload Area */}
-                    <div className="md:col-span-2">
-                        <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">Project Thumbnail</label>
-                        {currentThumbnail && (
-                            <img src={currentThumbnail} alt="Current" className="w-32 h-24 object-cover rounded-lg mb-4 border border-zinc-200 dark:border-white/10" />
-                        )}
-                        <input type="file" accept="image/*" onChange={handleFileChange} className="w-full text-sm text-zinc-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-zinc-100 file:text-zinc-700 hover:file:bg-zinc-200 dark:file:bg-white/10 dark:file:text-zinc-300 dark:hover:file:bg-white/20 transition-colors cursor-pointer" />
-                    </div>
+                 
+                    {/* Thumbnail Text Path Area */}
+    <div className="md:col-span-2">
+        <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">Project Thumbnail Path</label>
+        
+        {/* Preview the image if a path is typed */}
+        {formData.thumbnail && (
+            <img 
+                src={formData.thumbnail?.startsWith('/') ? formData.thumbnail : `/${formData.thumbnail}`} 
+                alt="Preview" 
+                className="w-32 h-24 object-cover rounded-lg mb-4 border border-zinc-200 dark:border-white/10" 
+            />
+        )}
+        
+        {/* The Text Input */}
+        <input 
+            type="text" 
+            name="thumbnail" 
+            value={formData.thumbnail} 
+            onChange={handleChange} 
+            placeholder="e.g., /images/hiragana.png" 
+            className="w-full px-4 py-2 rounded-lg bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-white/10 dark:text-white" 
+        />
+    </div>
 
                     <div className="md:col-span-2"><label className="block text-sm font-medium dark:text-zinc-300 mb-1">Title</label><input type="text" name="title" value={formData.title} onChange={handleChange} required className="w-full px-4 py-2 rounded-lg bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-white/10 dark:text-white" /></div>
                     <div className="md:col-span-2"><label className="block text-sm font-medium dark:text-zinc-300 mb-1">Slug</label><input type="text" name="slug" value={formData.slug} onChange={handleChange} required className="w-full px-4 py-2 rounded-lg bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-white/10 dark:text-white" /></div>
