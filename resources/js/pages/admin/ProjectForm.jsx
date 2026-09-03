@@ -31,8 +31,8 @@ export default function ProjectForm() {
                 })
                 .catch(err => {
     console.error("API Error:", err);
-    setLoading(false); 
-    // We temporarily removed navigate() so you stay on the page!
+    alert("Failed to load project data. It may have been deleted.");
+    navigate('/manage-luqman/projects'); 
 });
         }
     }, [id, navigate, isEditing]);
