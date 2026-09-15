@@ -187,6 +187,8 @@ This portfolio is more than a personal website. It serves as a practical demonst
 
 The project reflects my interest in building maintainable systems, learning modern development practices, and applying software engineering concepts to real-world applications.
 
+Live Demo: https://luqman-portfolio.onrender.com/
+
 ## 👨‍💻 About the Developer
 
 **Luqmanul Hakim**
